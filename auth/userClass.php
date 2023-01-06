@@ -5,6 +5,7 @@ class user {
     public $id;
     public $isAuthorized;
     public $userErr;
+    public $errType;
   
     function __construct($id,$isAuthorized,$name) {
       $this->id = $id;
@@ -14,6 +15,10 @@ class user {
   
     function set_userErr($err) {
       $this->userErr = $err;
+    }
+
+    function set_errType($type) {
+      $this->errType = $type;
     }
 
     

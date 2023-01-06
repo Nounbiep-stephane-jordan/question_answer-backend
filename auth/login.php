@@ -14,6 +14,7 @@ header("Access-Control-Allow-Headers: *");
     
     //stopping auth if any value is null
     if($name==null || $password==null) {
+      $notloggedinUser->set_errType("all");
       $notloggedinUser->set_userErr('values cannot be null');
       echo json_encode($notloggedinUser);
       return null;
@@ -30,6 +31,7 @@ header("Access-Control-Allow-Headers: *");
         
         //checking if password recieved from the form match the one in the database
         if($password !== $existingPassword) {
+          $notloggedinUser->set_errType("password");
           $notloggedinUser->set_userErr('password do not match');
           echo json_encode($notloggedinUser);
           return null;
@@ -44,6 +46,7 @@ header("Access-Control-Allow-Headers: *");
     
     
       // if the execution recheases this level then there was no user found 
+      $notloggedinUser->set_errType("name");
       $notloggedinUser->set_userErr('no user with this name');
       echo json_encode($notloggedinUser);
       return  null;

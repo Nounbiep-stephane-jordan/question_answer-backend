@@ -15,6 +15,7 @@ header("Access-Control-Allow-Headers: *");
     
     //stopping auth if any value is null
     if($name==null || $email==null || $profileImage==null || $password==null) {
+      $not_registered_user->set_errType("all");
       $not_registered_user->set_userErr('values cannot be empty');
       echo json_encode($not_registered_user);
       return null;
@@ -22,6 +23,7 @@ header("Access-Control-Allow-Headers: *");
 
     //verifying that password length is greather than 6
     if(strlen( $password) < 6 ) {
+      $not_registered_user->set_errType("password");
       $not_registered_user->set_userErr('password must be six or grether than six character length');
       echo json_encode($not_registered_user);
       return null;
