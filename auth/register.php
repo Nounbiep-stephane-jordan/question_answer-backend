@@ -30,12 +30,19 @@ header("Access-Control-Allow-Headers: *");
     }
     
 
+    //hashing password
+    $hashed = password_hash($password, PASSWORD_DEFAULT);
     //storring user information in database
-    $result = mysqli_query($conn, "INSERT INTO user(name,password,email,profileImage) VALUE ('$name','$password','$email','$profileImage')");
+   if($hashed){
+    $result = mysqli_query($conn, "INSERT INTO user(name,password,email,profileImage) VALUE ('$name','$hashed','$email','$profileImage')");
     if ($result) {
-        $registered_user = new user(null,true,$name);  //creating an authorized user
-        echo json_encode($registered_user);
+      // session_start();
+      // $_SESSION["user_name"] = $name;
+      // $_SESSION["isAuth"] = true;
+      $registered_user = new user(null,true,$name);  //creating an authorized user
+      echo json_encode($registered_user);
 
     }
+   }
 
 ?>
